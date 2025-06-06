@@ -24,8 +24,8 @@ export default function PrivacyPage() {
 
             <h2 className="text-xl font-semibold mt-6 mb-3">Introduction</h2>
             <p className="text-gray-600 mb-4">
-              This Privacy Policy describes how PowerGrid Africa ("we," "us," or "our") collects, uses, and shares
-              information in connection with your use of our website (powergridafrica.example).
+              This Privacy Policy describes how AI4EA ("we," "us," or "our") collects, uses, and shares
+              information in connection with your use of our website (AI4EA.example).
             </p>
 
             <h2 className="text-xl font-semibold mt-6 mb-3">Information We Collect</h2>
@@ -66,7 +66,7 @@ export default function PrivacyPage() {
 
             <h2 className="text-xl font-semibold mt-6 mb-3">Contact Us</h2>
             <p className="text-gray-600 mb-4">
-              If you have any questions about this Privacy Policy, please contact us at: privacy@powergridafrica.example
+              If you have any questions about this Privacy Policy, please contact us at: privacy@AI4EA.example
             </p>
           </div>
         </div>

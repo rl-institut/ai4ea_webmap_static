@@ -6,7 +6,7 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "PowerGrid Africa - Electricity Load Visualization",
+  title: "AI4EA",
   description: "Interactive map for visualizing electricity load data across West African countries",
     generator: 'v0.dev'
 }

@@ -21,7 +21,7 @@ export default function SourcesPage() {
 
           <div className="prose max-w-none">
             <p className="text-gray-600 mb-6">
-              This page provides information about the data sources used in the PowerGrid Africa platform. Understanding
+              This page provides information about the data sources used in AI4EA. Understanding
               our data sources helps users interpret the visualizations correctly.
             </p>
 

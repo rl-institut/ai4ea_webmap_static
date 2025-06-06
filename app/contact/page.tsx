@@ -23,14 +23,14 @@ export default function ContactPage() {
             <div>
               <h2 className="text-xl font-semibold mb-4">Get in Touch</h2>
               <p className="text-gray-600 mb-4">
-                Have questions about the PowerGrid Africa platform? We're here to help. Fill out the form or use the
+                Have questions about AI4EA? We're here to help. Fill out the form or use the
                 contact information below to reach us.
               </p>
 
               <div className="mt-6 space-y-4">
                 <div>
                   <h3 className="font-medium text-gray-900">Email</h3>
-                  <p className="text-gray-600">contact@powergridafrica.example</p>
+                  <p className="text-gray-600">contact@AI4EA.example</p>
                 </div>
 
                 <div>

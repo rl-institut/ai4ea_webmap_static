@@ -21,14 +21,14 @@ export default function AboutPage() {
 
           <div className="prose max-w-none">
             <p className="text-gray-600 mb-4">
-              This is the About page for the PowerGrid Africa platform. This page would contain information about the
+              This is the About page for the AI4EA project. This page would contain information about the
               project, its goals, and the team behind it.
             </p>
 
             <h2 className="text-xl font-semibold mt-6 mb-3">Project Overview</h2>
             <p className="text-gray-600 mb-4">
-              The PowerGrid Africa platform is designed to visualize electricity load data across local regions (LGAs)
-              in Africa. It provides tools for analyzing peak demand, load factors, and electrification rates across
+              The AI4EA tool is designed to visualize electricity load data across local regions
+              in African countries. It provides tools for analyzing peak demand, load factors, and electrification rates across
               different countries and regions.
             </p>
 

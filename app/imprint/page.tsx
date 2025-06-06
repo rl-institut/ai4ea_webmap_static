@@ -24,11 +24,11 @@ export default function ImprintPage() {
             <p className="text-gray-600 mb-4">This website is operated by:</p>
 
             <div className="bg-gray-50 p-4 rounded mb-6">
-              <p className="text-gray-700">PowerGrid Africa Ltd.</p>
+              <p className="text-gray-700">AI4EA</p>
               <p className="text-gray-700">123 Energy Street</p>
               <p className="text-gray-700">Example City, EX 12345</p>
               <p className="text-gray-700">Country</p>
-              <p className="text-gray-700 mt-2">Email: info@powergridafrica.example</p>
+              <p className="text-gray-700 mt-2">Email: info@AI4EA.example</p>
               <p className="text-gray-700">Phone: +1 (555) 123-4567</p>
             </div>
 
@@ -36,7 +36,7 @@ export default function ImprintPage() {
             <p className="text-gray-600 mb-4">
               John Doe
               <br />
-              CEO, PowerGrid Africa Ltd.
+              CEO, AI4EA
               <br />
               Address same as above
             </p>
@@ -53,7 +53,7 @@ export default function ImprintPage() {
             <h2 className="text-xl font-semibold mt-6 mb-3">Disclaimer</h2>
             <p className="text-gray-600 mb-4">
               The information contained in this website is for general information purposes only. The information is
-              provided by PowerGrid Africa Ltd., and while we endeavor to keep the information up to date and correct,
+              provided by AI4EA., and while we endeavor to keep the information up to date and correct,
               we make no representations or warranties of any kind, express or implied, about the completeness,
               accuracy, reliability, suitability or availability with respect to the website or the information,
               products, services, or related graphics contained on the website for any purpose.
@@ -61,10 +61,10 @@ export default function ImprintPage() {
 
             <h2 className="text-xl font-semibold mt-6 mb-3">Copyright</h2>
             <p className="text-gray-600 mb-4">
-              © 2023 PowerGrid Africa Ltd. All rights reserved. The content, design, and layout of this website are
-              subject to copyright owned by PowerGrid Africa Ltd. or used under license from third-party copyright
+              © 2023 AI4EA. All rights reserved. The content, design, and layout of this website are
+              subject to copyright owned by AI4EA or used under license from third-party copyright
               owners. No part of this website may be reproduced in any form without the prior written permission of
-              PowerGrid Africa Ltd.
+              AI4EA.
             </p>
           </div>
         </div>
