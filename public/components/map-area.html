@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Area Component</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <div class="flex-1 flex flex-col relative">
+        <!-- Search Bar -->
+        <div class="p-3 bg-gray-50 border-b border-gray-200 h-[65px] flex items-center">
+            <div class="flex items-center space-x-2 w-full max-w-2xl">
+                <div class="relative flex-1">
+                    <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"></i>
+                    <input type="text" placeholder="Jump to country or region..." class="pl-10 h-10 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Area -->
+        <div class="flex-1 relative">
+            <!-- Map Controls -->
+            <div class="absolute top-4 right-4 space-y-2 z-[900]">
+                <!-- Base Map Control -->
+                <div class="bg-white p-3 w-40 rounded-lg shadow-sm border border-gray-200">
+                    <div class="space-y-3">
+                        <div class="space-y-2">
+                            <label class="text-xs font-medium">Base Map</label>
+                            <select id="mapStyleSelect" class="w-full h-8 px-2 border border-gray-300 rounded-md text-sm">
+                                <option value="Light">Light</option>
+                                <option value="Dark">Dark</option>
+                                <option value="Satellite">Satellite</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legend -->
+                <div class="bg-white p-3 w-40 rounded-lg shadow-sm border border-gray-200">
+                    <div class="space-y-2">
+                        <label class="text-xs font-medium leading-tight">Legend - Peak max</label>
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-4 h-2 rounded flex-shrink-0" style="background-color: #ffffcc;"></div>
+                                <span class="text-xs text-gray-600">5 MW</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-4 h-2 rounded flex-shrink-0" style="background-color: #a1dab4;"></div>
+                                <span class="text-xs text-gray-600">10 MW</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-4 h-2 rounded flex-shrink-0" style="background-color: #41b6c4;"></div>
+                                <span class="text-xs text-gray-600">15 MW</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-4 h-2 rounded flex-shrink-0" style="background-color: #2c7fb8;"></div>
+                                <span class="text-xs text-gray-600">25 MW</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-4 h-2 rounded flex-shrink-0" style="background-color: #253494;"></div>
+                                <span class="text-xs text-gray-600">30 MW</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leaflet Map Container -->
+            <div id="map" class="w-full h-full" style="min-height: 500px;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mock country data
+        const mockCountries = [
+            {
+                name: "Ghana",
+                lat: 7.9465,
+                lng: -1.0232,
+                peakDemand: 245,
+                polygon: [
+                    [-3.0485543918543954, 5.044025460524637],
+                    [-2.766650016281403, 5.279508697907232],
+                    [-2.9757955564743668, 5.732102068787199],
+                    [-3.1849343722235517, 6.834831532891215],
+                    [-2.5574867267589525, 8.214094387702588],
+                    [-2.8120995877485484, 9.749933850918538],
+                    [-2.8575662145852334, 11.04677882363238],
+                    [-0.11138418465702671, 11.144944607501458],
+                    [0.19780954829386133, 10.475079496536992],
+                    [0.4251646168573302, 9.812709687899371],
+                    [0.3887861641865413, 9.49894362418219],
+                    [0.49784683654547734, 8.789660816421446],
+                    [0.6614557717292087, 8.42100698323165],
+                    [0.6160369654628823, 7.799875520172122],
+                    [0.5887654769635162, 7.19584442809402],
+                    [0.6888870587815745, 6.609051293288587],
+                    [1.2163399724606734, 6.139103813287321],
+                    [0.852612126695675, 5.759223321693682],
+                    [-0.05675553912286091, 5.578243662482393],
+                    [-1.3116780522583156, 5.06215197801852],
+                    [-2.075537777225776, 4.726908890128854],
+                    [-3.0485542809047104, 5.053084088422821],
+                    [-3.0485696197061145, 5.04388665181807]
+                ]
+            },
+            {
+                name: "Nigeria",
+                lat: 9.082,
+                lng: 8.6753,
+                peakDemand: 189,
+                polygon: [
+                    [2.69228220558594, 6.3676710615714285],
+                    [4.40633494231372, 6.418239668810628],
+                    [5.8751724564062044, 4.2830596250361594],
+                    [8.50294290465061, 4.523635289265712],
+                    [9.430161341694827, 6.164514864227414],
+                    [10.725800716173552, 7.025646259805669],
+                    [11.522668054476213, 6.720582133790629],
+                    [13.354816300028176, 9.81744091659003],
+                    [13.995361706299576, 12.131914137683097],
+                    [13.720334513252254, 13.715095673713463],
+                    [9.91415563368875, 13.066684257894991],
+                    [6.759674627928206, 13.666614065877198],
+                    [4.349401168850363, 13.6342184275168],
+                    [3.6436743496266786, 12.346652417994534],
+                    [3.689371208804374, 10.451307325112424],
+                    [2.7613395451352574, 9.055069477416595],
+                    [2.69228220558594, 6.3676710615714285]
+                ]
+            },
+            {
+                name: "Benin",
+                lat: 9.3077,
+                lng: 2.3158,
+                peakDemand: 156,
+                polygon: [
+                    [2.706562747237001, 6.409928916473177],
+                    [2.8338803651374747, 9.13850695826693],
+                    [3.7932606087915417, 10.563152172652991],
+                    [3.5581414457465144, 11.850149668534456],
+                    [2.7401181997878155, 12.434068525358342],
+                    [2.328423649172578, 12.165629316153115],
+                    [1.3087046313599444, 11.336065702024442],
+                    [0.9336870790633895, 10.999949430752608],
+                    [0.7447461257232533, 10.481831827734652],
+                    [1.3113658514796782, 10.03155431161764],
+                    [1.4205231416510173, 9.317553191097318],
+                    [1.752393675882928, 6.267359742893973],
+                    [2.706562747237001, 6.409928916473177]
+                ]
+            },
+            {
+                name: "Togo",
+                lat: 8.6195,
+                lng: 0.8248,
+                peakDemand: 134,
+                polygon: [
+                    [1.7097799808383911, 6.338604913806805],
+                    [1.5764333375147146, 9.24705288326328],
+                    [0.7904362323294265, 11.042485836839788],
+                    [0.020263481015405205, 11.113865073491269],
+                    [0.3721839294910012, 10.021147283699833],
+                    [0.523322106120645, 8.48324131474746],
+                    [0.605642045251102, 6.729716084230418],
+                    [1.1570051652311406, 6.06208756751785],
+                    [1.7097799808383911, 6.338604913806805]
+                ]
+            },
+            {
+                name: "Niger",
+                lat: 17.6078,
+                lng: 8.0817,
+                peakDemand: 98,
+                polygon: [
+                    [0.166, 11.9434],
+                    [2.0508, 12.627],
+                    [3.5156, 12.0352],
+                    [3.6133, 11.6602],
+                    [4.2676, 12.8711],
+                    [5.2441, 13.8711],
+                    [6.1426, 13.5078],
+                    [7.0313, 13.0898],
+                    [8.5156, 12.8516],
+                    [9.9512, 12.8516],
+                    [10.9863, 13.2539],
+                    [12.0215, 13.0371],
+                    [13.3086, 13.5547],
+                    [14.5156, 13.9727],
+                    [15.2832, 15.6836],
+                    [15.957, 20.3379],
+                    [15.957, 23.4707],
+                    [11.9727, 23.4707],
+                    [8.5742, 21.5645],
+                    [5.6738, 19.6016],
+                    [2.1777, 15.9434],
+                    [0.166, 14.9277],
+                    [0.166, 11.9434]
+                ]
+            }
+        ];
+
+        // Initialize map
+        const map = L.map('map').setView([9.082, 1.0199], 5);
+
+        // Add tile layer
+        let currentTileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Function to get color based on intensity
+        function getColorFromIntensity(intensity) {
+            if (intensity >= 80) return "#253494";
+            if (intensity >= 60) return "#2c7fb8";
+            if (intensity >= 40) return "#41b6c4";
+            if (intensity >= 20) return "#a1dab4";
+            return "#ffffcc";
+        }
+
+        // Add country polygons
+        mockCountries.forEach(country => {
+            const intensity = Math.min(100, Math.floor((country.peakDemand / 250) * 100));
+            const color = getColorFromIntensity(intensity);
+            
+            // Convert coordinates to Leaflet format [lat, lng]
+            const leafletCoords = country.polygon.map(([lng, lat]) => [lat, lng]);
+            
+            const polygon = L.polygon(leafletCoords, {
+                color: "#ffffff",
+                weight: 2,
+                opacity: 1,
+                fillColor: color,
+                fillOpacity: 0.8
+            });
+
+            // Add hover effects
+            polygon.on('mouseover', function() {
+                this.setStyle({
+                    weight: 3,
+                    fillOpacity: 0.9,
+                    color: "#000000"
+                });
+            });
+
+            polygon.on('mouseout', function() {
+                this.setStyle({
+                    weight: 2,
+                    fillOpacity: 0.8,
+                    color: "#ffffff"
+                });
+            });
+
+            // Add popup
+            const popupContent = `
+    <div class="p-3 min-w-[240px] max-w-[280px]">
+        <h3 class="text-base font-semibold text-gray-900 mb-2 leading-tight">${country.name}</h3>
+        <div class="border-t border-gray-200 pt-2 pb-2">
+            <div class="flex justify-between items-center py-1">
+                <span class="text-gray-500 text-sm">Peak max:</span>
+                <span class="font-bold text-gray-900 ml-2 text-sm">${country.peakDemand} MW</span>
+            </div>
+            <div class="flex justify-between items-center py-1">
+                <span class="text-gray-500 text-sm">Mean:</span>
+                <span class="font-bold text-gray-900 ml-2 text-sm">${Math.round(country.peakDemand * 0.7)} MW</span>
+            </div>
+            <div class="flex justify-between items-center py-1">
+                <span class="text-gray-500 text-sm">Aggregated:</span>
+                <span class="font-bold text-gray-900 ml-2 text-sm">${Math.round(country.peakDemand * 0.85)} MWh/day</span>
+            </div>
+            <div class="flex justify-between items-center py-1">
+                <span class="text-gray-500 text-sm">Household Peak max:</span>
+                <span class="font-bold text-gray-900 ml-2 text-sm">${Math.round(country.peakDemand * 0.4)} kW</span>
+            </div>
+            <div class="flex justify-between items-center py-1">
+                <span class="text-gray-500 text-sm">Household mean:</span>
+                <span class="font-bold text-gray-900 ml-2 text-sm">${Math.round(country.peakDemand * 0.3)} W</span>
+            </div>
+            <div class="flex justify-between items-center py-1">
+                <span class="text-gray-500 text-sm">Household aggregated:</span>
+                <span class="font-bold text-gray-900 ml-2 text-sm">${Math.round(country.peakDemand * 0.35)} kWh/day</span>
+            </div>
+        </div>
+        <div class="pt-2 flex space-x-2 border-t border-gray-200">
+            <button onclick="showRightPanel('${country.name}')" class="flex-1 flex items-center justify-center space-x-1 px-3 py-2 text-xs bg-emerald-700 text-white rounded-md hover:bg-emerald-800 font-medium transition-colors duration-200">
+                Analyze Region
+            </button>
+        </div>
+    </div>
+`;
+
+            polygon.bindPopup(popupContent, {
+                maxWidth: 320,
+                className: "custom-popup"
+            });
+
+            polygon.addTo(map);
+        });
+
+        // Map style change functionality
+        document.getElementById('mapStyleSelect').addEventListener('change', function() {
+            const style = this.value;
+            let tileUrl;
+            
+            switch(style) {
+                case 'Dark':
+                    tileUrl = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+                    break;
+                case 'Satellite':
+                    tileUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+                    break;
+                default:
+                    tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+            }
+            
+            map.removeLayer(currentTileLayer);
+            currentTileLayer = L.tileLayer(tileUrl, {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+        });
+    </script>
+
+    <style>
+        .leaflet-popup-content {
+            margin: 0;
+            padding: 0;
+            width: 100% !important;
+        }
+
+        .leaflet-popup-content-wrapper {
+            width: 100% !important;
+            padding: 0;
+            border-radius: 8px;
+            min-width: 280px;
+        }
+
+        .custom-popup .leaflet-popup-content-wrapper {
+            padding: 0;
+            width: auto !important;
+            min-width: 280px;
+        }
+
+        .leaflet-popup {
+            margin-bottom: 20px;
+        }
+
+        .leaflet-popup-tip-container {
+            width: 40px;
+            height: 20px;
+        }
+    </style>
+</body>
+</html>

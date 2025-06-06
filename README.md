@@ -26,6 +26,10 @@ To start project:
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
+### HTML Components
+
+Components can be seen under [http://localhost:3000/components/index.html](http://localhost:3000/components/index.html)
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.

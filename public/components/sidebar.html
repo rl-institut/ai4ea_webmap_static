@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar Component</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <div class="w-[360px] bg-gray-50 border-r border-gray-200 flex flex-col h-full">
+        <!-- Header -->
+        <div class="p-3 border-b border-gray-200 h-[65px] flex items-center">
+            <h2 class="text-lg font-semibold">Filters & Settings</h2>
+        </div>
+
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto p-3 space-y-6">
+            <!-- Data Layer Controls -->
+            <div class="space-y-3">
+                <div class="flex items-center space-x-1">
+                    <i data-lucide="database" class="h-4 w-4 text-gray-600"></i>
+                    <label class="text-base">Data Layer</label>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <button class="data-layer-btn flex items-center justify-center py-6 px-4 h-auto text-sm transition-colors duration-200 bg-emerald-700 text-white hover:bg-emerald-800 hover:text-white focus:bg-emerald-800 border-emerald-700 font-medium border rounded-md" data-value="Peak max">
+                        Peak max
+                    </button>
+                    <button class="data-layer-btn flex items-center justify-center py-6 px-4 h-auto text-sm transition-colors duration-200 border-emerald-500 bg-white text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800 border rounded-md" data-value="Mean">
+                        Mean
+                    </button>
+                    <button class="data-layer-btn flex items-center justify-center py-6 px-4 h-auto text-sm transition-colors duration-200 border-emerald-500 bg-white text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800 border rounded-md" data-value="Aggregated">
+                        Aggregated
+                    </button>
+                    <button class="data-layer-btn flex items-center justify-center py-6 px-4 h-auto text-sm transition-colors duration-200 border-emerald-500 bg-white text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800 border rounded-md" data-value="Household Peak max">
+                        Household Peak
+                    </button>
+                    <button class="data-layer-btn flex items-center justify-center py-6 px-4 h-auto text-sm transition-colors duration-200 border-emerald-500 bg-white text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800 border rounded-md" data-value="Household mean">
+                        Household Mean
+                    </button>
+                    <button class="data-layer-btn flex items-center justify-center py-6 px-4 h-auto text-sm transition-colors duration-200 border-emerald-500 bg-white text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800 border rounded-md" data-value="Household aggregated">
+                        Household Agg.
+                    </button>
+                </div>
+            </div>
+
+            <!-- Time Range Toggle -->
+            <div class="space-y-2">
+                <div class="flex items-center space-x-1">
+                    <i data-lucide="clock" class="h-4 w-4 text-gray-600"></i>
+                    <label>Time Range</label>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <button class="time-range-btn flex items-center justify-center p-3 h-auto transition-colors duration-200 bg-gray-500 text-white hover:bg-gray-600 hover:text-white border-gray-500 border rounded-md" data-value="Daily">
+                        <i data-lucide="calendar" class="h-4 w-4 mr-1.5"></i>
+                        <span class="text-xs">Daily</span>
+                    </button>
+                    <button class="time-range-btn flex items-center justify-center p-3 h-auto transition-colors duration-200 bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-600 border-gray-200 border rounded-md" data-value="Weekly">
+                        <i data-lucide="bar-chart-3" class="h-4 w-4 mr-1.5"></i>
+                        <span class="text-xs">Weekly</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Load Type Buttons -->
+            <div class="space-y-2">
+                <div class="flex items-center space-x-1">
+                    <i data-lucide="zap" class="h-4 w-4 text-gray-600"></i>
+                    <label>Load Type</label>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <button class="load-type-btn flex items-center justify-center p-3 h-auto transition-colors duration-200 bg-gray-500 text-white hover:bg-gray-600 hover:text-white border-gray-500 border rounded-md" data-value="Total">
+                        <i data-lucide="zap" class="h-4 w-4 mr-1.5"></i>
+                        <span class="text-xs">Total</span>
+                    </button>
+                    <button class="load-type-btn flex items-center justify-center p-3 h-auto transition-colors duration-200 bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-600 border-gray-200 border rounded-md" data-value="Residential">
+                        <i data-lucide="home" class="h-4 w-4 mr-1.5"></i>
+                        <span class="text-xs">Residential</span>
+                    </button>
+                    <button class="load-type-btn flex items-center justify-center p-3 h-auto transition-colors duration-200 bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-600 border-gray-200 border rounded-md" data-value="Commercial">
+                        <i data-lucide="building" class="h-4 w-4 mr-1.5"></i>
+                        <span class="text-xs">Commercial</span>
+                    </button>
+                    <button class="load-type-btn flex items-center justify-center p-3 h-auto transition-colors duration-200 bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-600 border-gray-200 border rounded-md" data-value="Industrial">
+                        <i data-lucide="factory" class="h-4 w-4 mr-1.5"></i>
+                        <span class="text-xs">Industrial</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="p-3 border-t border-gray-200 bg-gray-50">
+            <div class="flex justify-center space-x-4 text-sm text-gray-500">
+                <a href="/privacy" class="hover:text-[#2C6E49]">Privacy</a>
+                <span>•</span>
+                <a href="/imprint" class="hover:text-[#2C6E49]">Imprint</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Data layer buttons
+            const dataLayerBtns = document.querySelectorAll('.data-layer-btn');
+            dataLayerBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    dataLayerBtns.forEach(b => {
+                        b.className = 'data-layer-btn flex items-center justify-center py-6 px-4 h-auto text-sm transition-colors duration-200 border-emerald-500 bg-white text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800 border rounded-md';
+                    });
+                    // Add active class to clicked button
+                    this.className = 'data-layer-btn flex items-center justify-center py-6 px-4 h-auto text-sm transition-colors duration-200 bg-emerald-700 text-white hover:bg-emerald-800 hover:text-white focus:bg-emerald-800 border-emerald-700 font-medium border rounded-md';
+                });
+            });
+
+            // Time range buttons
+            const timeRangeBtns = document.querySelectorAll('.time-range-btn');
+            timeRangeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    timeRangeBtns.forEach(b => {
+                        b.className = 'time-range-btn flex items-center justify-center p-3 h-auto transition-colors duration-200 bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-600 border-gray-200 border rounded-md';
+                    });
+                    this.className = 'time-range-btn flex items-center justify-center p-3 h-auto transition-colors duration-200 bg-gray-500 text-white hover:bg-gray-600 hover:text-white border-gray-500 border rounded-md';
+                });
+            });
+
+            // Load type buttons
+            const loadTypeBtns = document.querySelectorAll('.load-type-btn');
+            loadTypeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    loadTypeBtns.forEach(b => {
+                        b.className = 'load-type-btn flex items-center justify-center p-3 h-auto transition-colors duration-200 bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-600 border-gray-200 border rounded-md';
+                    });
+                    this.className = 'load-type-btn flex items-center justify-center p-3 h-auto transition-colors duration-200 bg-gray-500 text-white hover:bg-gray-600 hover:text-white border-gray-500 border rounded-md';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
