@@ -18,29 +18,13 @@ Prototype of an interactive web application for visualizing and analyzing electr
 - Node.js 18.x or later
 - npm or yarn
 
-### Installation
+### Use
 
-1. Clone the repository:
-   \`\`\`bash
-   git clone https://github.com/yourusername/powergrid-africa.git
-   cd powergrid-africa
-   \`\`\`
+To start project:
 
-2. Install dependencies:
-   \`\`\`bash
-   npm install
-   # or
-   yarn install
-   \`\`\`
+`npm run dev`
 
-3. Run the development server:
-   \`\`\`bash
-   npm run dev
-   # or
-   yarn dev
-   \`\`\`
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
 ## License
 
